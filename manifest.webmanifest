@@ -1,0 +1,10 @@
+{
+  "name": "6 weken trainingslog",
+  "short_name": "Trainingslog",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f1115",
+  "theme_color": "#0f1115",
+  "description": "Persoonlijke 6-weken trainingslog met automatische lokale opslag."
+}
