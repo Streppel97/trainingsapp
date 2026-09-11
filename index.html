@@ -13,26 +13,64 @@
 :root{--bg:#0f1115;--card:#171a21;--card2:#1d222b;--text:#f4f6f8;--muted:#a9b0bb;--line:#303743;--accent:#5aa7ff;--danger:#ff6b6b}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-.wrap{max-width:980px;margin:auto;padding:16px;padding-top:max(16px,env(safe-area-inset-top));padding-bottom:max(16px,env(safe-area-inset-bottom))}
-h1{margin:0 0 4px;font-size:24px}.muted{color:var(--muted);font-size:14px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.wrap{max-width:980px;margin:auto;padding:16px}
+h1{margin:0 0 4px;font-size:24px}
+.muted{color:var(--muted);font-size:14px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
 button,.filebtn{border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:10px;padding:10px 14px;min-height:44px;font-weight:700;cursor:pointer}
-button.active{background:var(--accent);border-color:var(--accent);color:#fff}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
-.exhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}.name{font-weight:800;font-size:17px}.target,.previous{font-size:12px;color:var(--muted);margin-top:3px}.previous{color:#b9d8ff;margin-top:6px}.sets{margin-top:12px;display:grid;gap:8px}.setrow{display:grid;grid-template-columns:56px minmax(0,1fr) minmax(0,1fr) 46px;gap:8px;align-items:end}.setlabel{padding-bottom:12px;color:var(--muted);font-size:13px}label{font-size:12px;color:var(--muted)}input,textarea{width:100%;background:#11151b;border:1px solid var(--line);color:var(--text);border-radius:9px;padding:10px;font-size:16px;min-height:44px;margin-top:4px}textarea{min-height:80px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.danger{border-color:var(--danger);color:#ffd6d6}.status{color:var(--muted);font-size:13px}
-@media(max-width:650px){.grid3{grid-template-columns:1fr}.setrow{grid-template-columns:44px minmax(0,1fr) minmax(0,1fr) 42px}.wrap{padding-left:12px;padding-right:12px}}
+button.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+.exhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.name{font-weight:800;font-size:17px}.target,.previous{font-size:12px;color:var(--muted);margin-top:3px}.previous{color:#b9d8ff;margin-top:6px}
+.sets{margin-top:12px;display:grid;gap:8px}
+.setrow{display:grid;grid-template-columns:56px minmax(0,1fr) minmax(0,1fr) 46px;gap:8px;align-items:end}
+.setlabel{padding-bottom:12px;color:var(--muted);font-size:13px}
+label{font-size:12px;color:var(--muted)}
+input,textarea{width:100%;background:#11151b;border:1px solid var(--line);color:var(--text);border-radius:9px;padding:10px;font-size:16px;min-height:44px;margin-top:4px}
+textarea{min-height:80px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.danger{border-color:var(--danger);color:#ffd6d6}
+.status{color:var(--muted);font-size:13px}
+@media(max-width:650px){.grid3{grid-template-columns:1fr}.setrow{grid-template-columns:44px minmax(0,1fr) minmax(0,1fr) 42px}.wrap{padding:12px}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <h1>6 weken trainingslog</h1>
 <div class="muted">Je invoer wordt automatisch op dit apparaat opgeslagen.</div>
+
 <div id="weeks" class="tabs"></div>
 <div id="sessions" class="tabs"></div>
-<div class="card"><div id="title" class="name"></div><div id="subtitle" class="muted"></div><div id="progress" class="status" style="margin-top:6px"></div></div>
+
+<div class="card">
+  <div id="title" class="name"></div>
+  <div id="subtitle" class="muted"></div>
+  <div id="progress" class="status" style="margin-top:6px"></div>
+</div>
+
 <div id="exerciseList"></div>
-<div class="card"><div class="name" style="margin-bottom:10px">Na de training</div><div class="grid3"><label>Energie 1–10<input id="energy" type="number" min="1" max="10"></label><label>Schouderpijn 0–10<input id="shoulder" type="number" min="0" max="10"></label><label>Zwaarte 1–10<input id="effort" type="number" min="1" max="10"></label></div><label style="display:block;margin-top:10px">Notitie<textarea id="notes"></textarea></label></div>
-<div class="actions"><button id="exportBtn">Export backup</button><label class="filebtn" for="importFile">Import backup</label><input id="importFile" type="file" accept=".json,application/json" style="display:none"><button id="clearSession">Wis huidige sessie</button><button id="clearAll" class="danger">Wis alles</button></div>
+
+<div class="card">
+  <div class="name" style="margin-bottom:10px">Na de training</div>
+  <div class="grid3">
+    <label>Energie 1–10<input id="energy" type="number" min="1" max="10"></label>
+    <label>Schouderpijn 0–10<input id="shoulder" type="number" min="0" max="10"></label>
+    <label>Zwaarte 1–10<input id="effort" type="number" min="1" max="10"></label>
+  </div>
+  <label style="display:block;margin-top:10px">Notitie<textarea id="notes"></textarea></label>
+</div>
+
+<div class="actions">
+  <button id="exportBtn">Export backup</button>
+  <label class="filebtn" for="importFile">Import backup</label>
+  <input id="importFile" type="file" accept=".json,application/json" style="display:none">
+  <button id="clearSession">Wis huidige sessie</button>
+  <button id="clearAll" class="danger">Wis alles</button>
+</div>
 <div id="saveStatus" class="status">Opgeslagen</div>
 </div>
+
 <script>
 (function(){
 const STORE='gym_log_v2';
@@ -71,7 +109,7 @@ let data={};
 try{const raw=localStorage.getItem(STORE)||localStorage.getItem(OLD)||'{}';data=JSON.parse(raw);if(!localStorage.getItem(STORE)&&localStorage.getItem(OLD))localStorage.setItem(STORE,raw)}catch(e){data={}}
 
 function k(w=week,s=session){return w+'-'+s}
-function defaultSet(){return {kg:'',reps:''}}
+function defaultSet(){return {kg:'',reps:'',manualKg:false}}
 function previousSets(i){
   if(week===1)return [];
   const p=data[k(week-1,session)];
@@ -79,7 +117,7 @@ function previousSets(i){
 }
 function seededSets(i,count=3){
   const prev=previousSets(i);
-  return Array.from({length:count},(_,j)=>({kg:(prev[j]&&prev[j].kg)||'',reps:''}));
+  return Array.from({length:count},(_,j)=>({kg:(prev[j]&&prev[j].kg)||'',reps:'',manualKg:false}));
 }
 function ensure(){
   if(!data[k()]) data[k()]={rows:{},energy:'',shoulder:'',effort:'',notes:''};
@@ -98,7 +136,7 @@ function ensure(){
     if(allEmpty && week>1){
       const prev=previousSets(i);
       if(prev.some(s=>s&&s.kg)){
-        cur.rows[i].sets=cur.rows[i].sets.map((s,j)=>({kg:(prev[j]&&prev[j].kg)||'',reps:s.reps||''}));
+        cur.rows[i].sets=cur.rows[i].sets.map((s,j)=>({kg:(prev[j]&&prev[j].kg)||'',reps:s.reps||'',manualKg:false}));
       }
     }
   });
@@ -156,7 +194,7 @@ function render(){
     add.addEventListener('click',()=>{
       const last=row.sets[row.sets.length-1]||defaultSet();
       const prev=previousSets(i), nextIndex=row.sets.length;
-      row.sets.push({kg:last.kg||((prev[nextIndex]&&prev[nextIndex].kg)||''),reps:''});
+      row.sets.push({kg:last.kg||((prev[nextIndex]&&prev[nextIndex].kg)||''),reps:'',manualKg:false});
       save();render();
     });
     head.appendChild(info);head.appendChild(add);card.appendChild(head);
@@ -168,41 +206,72 @@ function render(){
 
       const kgLabel=document.createElement('label');kgLabel.textContent='Gewicht (kg)';
       const kg=document.createElement('input');kg.type='number';kg.step='0.5';kg.min='0';kg.value=set.kg||'';
-      kg.addEventListener('input',()=>{set.kg=kg.value;save();progress()});kgLabel.appendChild(kg);
+      kg.addEventListener('input',()=>{
+        set.kg=kg.value;
+        set.manualKg=true;
+        for(let m=j+1;m<row.sets.length;m++){
+          if(row.sets[m].manualKg===true) break;
+          row.sets[m].kg=kg.value;
+        }
+        save();render();
+      });kgLabel.appendChild(kg);
 
       const repLabel=document.createElement('label');repLabel.textContent='Reps / sec';
       const reps=document.createElement('input');reps.type='number';reps.min='0';reps.value=set.reps||'';
       reps.addEventListener('input',()=>{set.reps=reps.value;save();progress()});repLabel.appendChild(reps);
 
-      const del=document.createElement('button');del.textContent='−';
-      del.addEventListener('click',()=>{if(row.sets.length>1){row.sets.splice(j,1);save();render()}});
+      const del=document.createElement('button');del.textContent='−';del.title='Verwijder set';
+      del.addEventListener('click',()=>{
+        if(row.sets.length>1){row.sets.splice(j,1);save();render()}
+      });
+
       r.append(n,kgLabel,repLabel,del);sets.appendChild(r);
     });
     card.appendChild(sets);list.appendChild(card);
   });
-  ['energy','shoulder','effort','notes'].forEach(x=>document.getElementById(x).value=cur[x]||'');
+
+  document.getElementById('energy').value=cur.energy||'';
+  document.getElementById('shoulder').value=cur.shoulder||'';
+  document.getElementById('effort').value=cur.effort||'';
+  document.getElementById('notes').value=cur.notes||'';
   progress();save();
 }
 function progress(){
   const cur=ensure();let done=0;
-  workouts[session].ex.forEach((_,i)=>{if(cur.rows[i].sets.some(s=>s.kg||s.reps))done++});
+  workouts[session].ex.forEach((_,i)=>{
+    if(cur.rows[i].sets.some(s=>s.kg||s.reps))done++;
+  });
   document.getElementById('progress').textContent=done+' / '+workouts[session].ex.length+' oefeningen ingevuld';
 }
 ['energy','shoulder','effort','notes'].forEach(id=>document.getElementById(id).addEventListener('input',saveMeta));
+
 document.getElementById('exportBtn').addEventListener('click',()=>{
-  saveMeta();const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);a.download='training-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);
+  saveMeta();
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='training-backup.json';a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),500);
 });
 document.getElementById('importFile').addEventListener('change',e=>{
-  const f=e.target.files[0];if(!f)return;const r=new FileReader();
-  r.onload=()=>{try{const x=JSON.parse(r.result);if(!x||typeof x!=='object')throw 0;data=x;save();render();alert('Backup hersteld.')}catch(_){alert('Ongeldige backup.')}};
-  r.readAsText(f);e.target.value='';
+  const f=e.target.files[0];if(!f)return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const imported=JSON.parse(reader.result);
+      if(!imported||typeof imported!=='object')throw new Error();
+      data=imported;save();render();alert('Backup hersteld.');
+    }catch(err){alert('Ongeldige backup.');}
+  };
+  reader.readAsText(f);e.target.value='';
 });
-document.getElementById('clearSession').addEventListener('click',()=>{if(confirm('Deze sessie wissen?')){delete data[k()];save();render()}});
-document.getElementById('clearAll').addEventListener('click',()=>{if(confirm('Alle trainingsdata wissen?')){data={};save();render()}});
+document.getElementById('clearSession').addEventListener('click',()=>{
+  if(confirm('Deze sessie wissen?')){delete data[k()];save();render()}
+});
+document.getElementById('clearAll').addEventListener('click',()=>{
+  if(confirm('Alle trainingsdata wissen?')){data={};save();render()}
+});
 window.addEventListener('beforeunload',saveMeta);
 render();
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
 })();
 </script>
 </body>
